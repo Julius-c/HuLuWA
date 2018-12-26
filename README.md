@@ -3,7 +3,7 @@
 
 - 葫芦娃与蝎子精带领的喽啰们在草地上自动战斗直到一方全部阵亡，爷爷与蛇精在阵地后排观战。
 
-![效果图](Huluwa/screenshot.jpg)
+![效果图](https://raw.githubusercontent.com/Julius-c/Huluwa/master/screenshot.jpg)
 ## 项目概述
 1. **项目构建**
 
