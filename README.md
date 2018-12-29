@@ -3,7 +3,7 @@
 
 - 葫芦娃与蝎子精带领的喽啰们在草地上自动战斗直到一方全部阵亡，爷爷与蛇精在阵地后排观战。
 
-![效果图](C:\Users\CC\Desktop\Huluwa\mdSupport\screen.jpg)
+![效果图](https://github.com/Julius-c/Huluwa/mdSupport/screen.jpg)
 
 ## 项目概述
 ### 项目目录与构建
@@ -33,7 +33,7 @@
 
 - 生物体类，包含`Being`基类与`Calabash`, `Grandpa`, `Scorpion`, `Snake`, `Soldiers	`五个派生类，以及为`Calabash`类服务的枚举类`COLOR`。
 
-  ![Package Being](C:\Users\CC\Desktop\Huluwa\mdSupport\being.jpg)
+  ![Package Being](https://github.com/Julius-c/Huluwa/mdSupport/being.jpg)
 
 - 生物体有自己的属性，包括姓名、生死、位置、好坏等，拥有自己生存与死亡时的图片、出场或者胜利动画，以及各自的线程。
 
@@ -222,19 +222,19 @@ class KeyParse implements EventHandler<KeyEvent> {
 
 ***阵型变换***
 
-![动画](C:\Users\CC\Desktop\Huluwa\mdSupport\gamestart.gif)
+![动画](https://github.com/Julius-c/Huluwa/mdSupport/gamestart.gif)
 
 ***战斗胜利***
 
-![战斗胜利](C:\Users\CC\Desktop\Huluwa\mdSupport\endgame.gif)
+![战斗胜利](https://github.com/Julius-c/Huluwa/mdSupport/endgame.gif)
 
 ***回放清晰***
 
-![回放](C:\Users\CC\Desktop\Huluwa\mdSupport\replay.gif)
+![回放](https://github.com/Julius-c/Huluwa/mdSupport/replay.gif)
 
 ***计时功能***
 
-![计时](C:\Users\CC\Desktop\Huluwa\mdSupport\timer.jpg)
+![计时](https://github.com/Julius-c/Huluwa/mdSupport/timer.jpg)
 
 ### 清理墓碑、不会堵死
 
