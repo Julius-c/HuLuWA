@@ -19,7 +19,7 @@
 
   - 双击可执行文件后即出现游戏默认初始界面，葫芦娃以長蛇阵型出站，妖精们以鶴翼阵型迎战。
   - 点击`start`按钮后战斗开始，开始计时。敌对双方寻找敌人厮杀，相互接触后随即判定其中一方的死亡(该概率由双方初始人数比确定)，死亡后化作墓碑实体。游戏开始`6s`后每隔`3s`随机选择消失一个墓碑，以防战场堵塞。
-  - 战斗结束后战斗过程已被记录在`/target/Combat.log`文件中，可以点击`Load`按钮加载回放该场战斗，若觉得精彩可以重命名后加以保存，新一轮战斗会覆盖`Combat.log`文件。
+  - 战斗结束后战斗过程已被记录在`/target/Combat.log`文件中，可以点击`Load`按钮或按下`L`键加载回放该场战斗，若觉得精彩可以重命名后加以保存，新一轮战斗会覆盖`Combat.log`文件。
   - 战斗结束或回放结束后，可变换妖精们的阵型重新战斗。共有八种阵型可供选择，判定胜负的概率也随阵型变化而变化。
   - 项目根目录中`Demo`文件夹已事先存储部分阵型下的精彩站斗，可直接`Load`进行回放。(其中yanyue.log即偃月阵型的回放时间越两分钟)
 
@@ -27,11 +27,11 @@
 
 ### 代码结构说明
 
-##### Main -- 项目程序的出入口
+#### Main -- 项目程序的出入口
 
-##### package Being
+#### package Being
 
-- 生物体类，包含`Being`基类与`Calabash`, `Grandpa`, `Scorpion`, `Snake`, `Soldiers	`五个派生类，以及为`Calabash`类服务的枚举类`COLOR`。
+- 生物体类，包含`Being`基类与`Calabash`, `Grandpa`, `Scorpion`, `Snake`, `Soldiers`五个派生类，以及为`Calabash`类服务的枚举类`COLOR`。
 
   ![Package Being](mdSupport/being.jpg)
 
@@ -41,7 +41,7 @@
   public Timer timer = new Timer();
   ```
 
-##### package Field
+#### package Field
 
 - 战场类，包括`Field`战场属性类、`FieldControl`战场安置类、`Square`战场基本单元类。
 - `Square`战场基本单元，可且仅可放置一个生物体。
@@ -70,7 +70,7 @@ void initField(String formation) {
 }
 ```
 
-##### package Formation
+#### package Formation
 
 - 阵型类，共"鶴翼", "雁行", "長蛇", "鋒矢", "偃月", "方门", "鱼鳞", "衡轭"八种阵型，只有蝎子精可以变阵。
 
@@ -81,15 +81,15 @@ public Position leader; //参照点位置
 public ArrayList<Position> pos = new ArrayList<>(); //相对于参照点的位置集合
 ```
 
-##### package Position
+#### package Position
 
 - 位置类，具有横纵坐标的属性，并且可返回上下左右四个方位的位置。
 
-##### package Sort
+#### package Sort
 
 - 排序类，可打乱葫芦娃的顺序、按葫芦娃姓名冒泡排序，按葫芦娃颜色二分排序。
 
-##### package FileControl
+#### package FileControl
 
 - 文件回放类，拥有自己的线程，可以加载、解析、写入、回放文件
 
@@ -99,11 +99,11 @@ private File loadFile() //通过FileChooser选择文件
 private ArrayList<String> parseFile(File file) //装饰器模式解析文件，存储在字符串列表
 	reader = new BufferedReader(new FileReader(file));
 private void writeFile(String filename, String Log) //将日志写入文件
-    writer = new BufferedWriter(new FileWriter(filename, false));
+	writer = new BufferedWriter(new FileWriter(filename, false));
 public void replayGame() //开启线程开始回放
 ```
 
-##### package GameControl
+#### package GameControl
 
 - `GuiControl`GUI实现类
   - 图形界面的实现类，实现了`Text`/`Label`/`Timeline`/`Button`等一系列控件，以及刷新界面的功能。
@@ -138,6 +138,7 @@ for (Calabash c : brothers)
 scorpion.timer.scheduleAtFixedRate(getTask(scorpion), 1000, 1000);
 for (Soldiers s : soldiers)
     s.timer.scheduleAtFixedRate(getTask(s), 1000, 1000);
+
 //刷新屏幕线程
 refreshTimer.scheduleAtFixedRate(new TimerTask() {
     @Override
@@ -145,6 +146,7 @@ refreshTimer.scheduleAtFixedRate(new TimerTask() {
         //刷新屏幕逻辑
     }
 }, 100, 500);
+
 //清理墓碑线程
 clearTimer.scheduleAtFixedRate(new TimerTask() {
     @Override
@@ -190,6 +192,7 @@ public void writeFile(String filename, String Log) {
         throw new RuntimeException("存档错误!");
     }
 }
+
 //响应键盘
 class KeyParse implements EventHandler<KeyEvent> {
     public void handle(KeyEvent event) {
