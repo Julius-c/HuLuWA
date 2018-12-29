@@ -1,6 +1,7 @@
-import javafx.application.Platform;
-import javafx.embed.swing.JFXPanel;
-import javafx.stage.Stage;
+import Being.*;
+import Field.*;
+import Position.Position;
+import Formation.Formation;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -16,17 +17,18 @@ public class FieldTest {
     private Scorpion scorpion = new Scorpion();
     @Test
     public void test() {
-        AboveAll God = new AboveAll(field, brothers, soldiers, grandpa, snake, scorpion);
+        FieldControl fieldControl = new FieldControl(field, brothers, soldiers, grandpa, snake, scorpion);
         for(int i = 0; i < 7; i ++) brothers.add(new Calabash(i + 1));
-        for(int i = 0; i < Formation.max; i ++) AboveAll.maxArmy.add(new Soldiers());
+        for(int i = 0; i < Formation.max; i ++) fieldControl.maxArmy.add(new Soldiers());
         Collections.shuffle(brothers);
-        God.initField("鶴翼");
+        fieldControl.initField("鶴翼");
         assertTrue(field.qualified);
         assertFalse(field.posQualified(new Position(-1, -1)));
         assertFalse(field.posQualified(new Position(11, 16)));
-        assertTrue(field.emptySquare(brothers.get(0).position.left()));
-        assertTrue(field.isOpposite(brothers.get(0).position, scorpion.position));
-        assertFalse(field.isOpposite(brothers.get(0).position, brothers.get(1).position));
+        assertTrue(field.emptySquare(brothers.get(0).getPosition().left()));
+        assertFalse(field.emptySquare(brothers.get(0).getPosition().down()));
+        assertTrue(field.isOpposite(brothers.get(0).getPosition(), scorpion.getPosition()));
+        assertFalse(field.isOpposite(brothers.get(0).getPosition(), brothers.get(1).getPosition()));
         System.out.println("Test Pass");
     }
 }

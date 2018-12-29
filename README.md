@@ -3,11 +3,11 @@
 
 - 葫芦娃与蝎子精带领的喽啰们在草地上自动战斗直到一方全部阵亡，爷爷与蛇精在阵地后排观战。
 
-![效果图](https://raw.githubusercontent.com/Julius-c/Huluwa/master/screenshot.jpg)
+![效果图](C:\Users\CC\Desktop\pic.JPG)
 ## 项目概述
 1. **项目构建**
 
-  - `mvn clean test package`即可得到`/target/calabash-1.0-SNAPSHOT.jar`可执行文件。
+  `mvn clean test package`即可得到`/target/calabash-1.0-SNAPSHOT.jar`可执行文件。
 
 2. **使用说明**
 
@@ -19,4 +19,5 @@
 
 3. **实现细节**
 
-  - (未完待续...
+- 代码结构说明
+- 
