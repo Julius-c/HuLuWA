@@ -30,6 +30,7 @@ public class GameLogic {
     private Grandpa grandpa = new Grandpa(new Position(5,1));
     private Snake snake = new Snake(new Position(5, 14));
     private Scorpion scorpion = new Scorpion();
+    private ArrayList<Integer> randArray = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
 
     //获取键盘输入
     class KeyParse implements EventHandler<KeyEvent> {
@@ -65,7 +66,7 @@ public class GameLogic {
                     if (neighbor != null && field.getLiveBeing(neighbor).isAlive() && en.isAlive())
                         fightRecord(start, neighbor);
                     else {
-                        Position end = fieldControl.chooseEnemy(en);
+                        Position end = chooseEnemy(en);
                         if (end == null) {
                             en.rotate.playFromStart();
                             if(isGaming) endGame(en);
@@ -95,11 +96,47 @@ public class GameLogic {
         },6000, 3000);//6s后每3s清空一个墓碑
     }
 
+    private synchronized Position chooseEnemy(Being en) {
+        if (en.getPara() == 1) {
+            Collections.shuffle(soldiers);
+            for (Soldiers s : soldiers)
+                if (s.isAlive())  return s.getPosition();
+            if (scorpion.isAlive())
+                return scorpion.getPosition();
+        } else {
+            Collections.shuffle(randArray);
+            for (Integer i : randArray)
+                if (brothers.get(i).isAlive())
+                    return brothers.get(i).getPosition();
+        }
+        return null;
+    }
+    private synchronized boolean letsFight(Position a, Position b) {
+        assert(field.getLiveBeing(a) != null && field.getLiveBeing(b) != null);
+        Being er = field.getLiveBeing(a);
+        Being ee = field.getLiveBeing(b);
+        assert (er.isAlive() && ee.isAlive());
+        int prob_a, prob_b;
+        if(er.getPara() == 1) {
+            prob_a = soldiers.size() + 1;
+            prob_b = brothers.size();
+        } else {
+            prob_a = brothers.size();
+            prob_b = soldiers.size() + 1;
+        }
+        Random rand = new Random();
+        int live = rand.nextInt(prob_a + prob_b);
+        if(live < prob_a) {
+            ee.die(); return true;
+        } else {
+            er.die(); return false;
+        }
+    }
     private synchronized void fightRecord(Position start, Position neighbor) {
         guiControl.addCross(start, neighbor);
         guiControl.refreshPane();
         combatLog += start.toString() + " and " + neighbor.toString() + " FIGHT\n";
-        if (fieldControl.letsFight(start, neighbor))
+        if (letsFight(start, neighbor))
             combatLog += neighbor.toString() + " DIE\n";
         else combatLog += start.toString() + " DIE\n";
     }

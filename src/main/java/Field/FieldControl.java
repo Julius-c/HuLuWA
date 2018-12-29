@@ -21,7 +21,6 @@ public class FieldControl {
     private Grandpa grandpa;
     private Snake snake;
     private Scorpion scorpion;
-    private ArrayList<Integer> randArray = new ArrayList<>(Arrays.asList(0, 1, 2, 3, 4, 5, 6));
 
     public ArrayList<Soldiers> maxArmy = new ArrayList<>();
 
@@ -82,44 +81,6 @@ public class FieldControl {
                     formation.leader.getY() + formation.pos.get(i).getY()));
         for (Soldiers s : soldiers) {
             field.square[s.getPosition().getX()][s.getPosition().getY()].setBeing(s);
-        }
-    }
-
-    public synchronized Position chooseEnemy(Being en) {
-        if (en.getPara() == 1) {
-            Collections.shuffle(soldiers);
-            for (Soldiers s : soldiers)
-                if (s.isAlive())  return s.getPosition();
-            if (scorpion.isAlive())
-                return scorpion.getPosition();
-        } else {
-            Collections.shuffle(randArray);
-            for (Integer i : randArray)
-                if (brothers.get(i).isAlive())
-                    return brothers.get(i).getPosition();
-        }
-        return null;
-    }
-
-    public synchronized boolean letsFight(Position a, Position b) {
-        assert(field.getLiveBeing(a) != null && field.getLiveBeing(b) != null);
-        Being er = field.getLiveBeing(a);
-        Being ee = field.getLiveBeing(b);
-        assert (er.isAlive() && ee.isAlive());
-        int prob_a, prob_b;
-        if(er.getPara() == 1) {
-            prob_a = soldiers.size() + 1;
-            prob_b = brothers.size();
-        } else {
-            prob_a = brothers.size();
-            prob_b = soldiers.size() + 1;
-        }
-        Random rand = new Random();
-        int live = rand.nextInt(prob_a + prob_b);
-        if(live < prob_a) {
-            ee.die(); return true;
-        } else {
-            er.die(); return false;
         }
     }
 }

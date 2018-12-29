@@ -22,6 +22,7 @@ public class FieldTest {
         for(int i = 0; i < Formation.max; i ++) fieldControl.maxArmy.add(new Soldiers());
         Collections.shuffle(brothers);
         fieldControl.initField("鶴翼");
+
         assertTrue(field.qualified);
         assertFalse(field.posQualified(new Position(-1, -1)));
         assertFalse(field.posQualified(new Position(11, 16)));
